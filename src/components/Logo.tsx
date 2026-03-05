@@ -13,9 +13,11 @@ export default function Logo() {
             <div className="container-wide">
                 <div className="grid-layout">
                     <div className="col-span-12">
-                        <h1 className="text-6xl md:text-8xl lg:text-[180px] font-bold tracking-tight leading-[1.1] pb-8 text-white relative">
-                            Tiny Ark<span>.</span>
-                        </h1>
+                        <img
+                            src="/Tiny_Ark_Logo_White.png"
+                            alt="Tiny Ark"
+                            className="w-full max-w-[300px] md:max-w-[500px] lg:max-w-[800px] h-auto object-contain"
+                        />
                     </div>
                 </div>
             </div>

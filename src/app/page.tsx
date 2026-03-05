@@ -302,9 +302,11 @@ export default function CredibilityPage() {
               <div className="container-wide pt-24">
                 <div className="grid-layout">
                   <div className="col-span-12">
-                    <h1 className="text-6xl font-bold tracking-tight text-white relative">
-                      Tiny Ark<span>.</span>
-                    </h1>
+                    <img
+                      src="/Tiny_Ark_Logo_White.png"
+                      alt="Tiny Ark"
+                      className="w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px] h-auto object-contain"
+                    />
                   </div>
                 </div>
               </div>
