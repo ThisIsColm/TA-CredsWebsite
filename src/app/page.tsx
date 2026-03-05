@@ -261,7 +261,7 @@ export default function CredibilityPage() {
                 <div className="col-span-4 lg:col-span-6">
                   <Reveal delay={0.1}>
                     <h2 className="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-12" style={{ color: "#111", letterSpacing: "-0.02em" }}>
-                      Everything you need. Nothing you don&apos;t.
+                      Everything you need.
                     </h2>
                   </Reveal>
 
