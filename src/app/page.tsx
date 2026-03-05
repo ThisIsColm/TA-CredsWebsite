@@ -40,6 +40,19 @@ function Reveal({
 }
 
 
+/* ── Navigation Hint ── */
+function NavigationHint() {
+  return (
+    <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[15] pointer-events-none text-white/40 font-mono text-[10px] uppercase tracking-[0.3em]">
+      <div className="flex items-center gap-3">
+        <span className="flex items-center justify-center w-6 h-6 border border-white/20 rounded">←</span>
+        <span>Use keys to navigate</span>
+        <span className="flex items-center justify-center w-6 h-6 border border-white/20 rounded">→</span>
+      </div>
+    </div>
+  );
+}
+
 /* ── Clickable Homepage Emails ── */
 function HomepageEmails() {
   return (
@@ -123,6 +136,7 @@ export default function CredibilityPage() {
       <VimeoHero />
       <Logo />
       <GrainOverlay />
+      <NavigationHint />
       <HomepageEmails />
 
 
@@ -164,7 +178,7 @@ export default function CredibilityPage() {
                 {/* Video content: span 7 columns on desktop */}
                 <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
                   <iframe
-                    src="https://player.vimeo.com/video/1157268231?h=d42e6ade47&autoplay=0&loop=1&byline=0&title=0&muted=1&quality=1080p&color=e85d04"
+                    src="https://player.vimeo.com/video/1157268231?h=d42e6ade47&loop=1&byline=0&title=0&quality=1080p&color=e85d04"
                     className="w-full h-full"
                     style={{ border: "none" }}
                     allow="autoplay; fullscreen"
@@ -233,7 +247,7 @@ export default function CredibilityPage() {
                 {/* Video: span 7 columns on desktop (on the left) */}
                 <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
                   <iframe
-                    src="https://player.vimeo.com/video/1169321210?autoplay=0&loop=1&byline=0&title=0&muted=1&quality=1080p&color=e85d04"
+                    src="https://player.vimeo.com/video/1169321210?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=1080p"
                     className="w-full h-full"
                     style={{ border: "none" }}
                     allow="autoplay; fullscreen"
