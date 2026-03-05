@@ -101,7 +101,7 @@ export default function WorldMap() {
     const prefersReducedMotion = useReducedMotion();
 
     return (
-        <div className="flex flex-col h-full w-full px-6 lg:px-16 lg:py-24 py-24 select-none justify-between max-w-7xl mx-auto">
+        <div className="flex flex-col h-full w-full px-6 lg:px-16 pt-[66px] pb-24 lg:py-24 select-none justify-between max-w-7xl mx-auto">
             {/* Header section (replaces top headline to match breadcrumbs) */}
             <div className="w-full">
                 <motion.span

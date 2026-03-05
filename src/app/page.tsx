@@ -43,7 +43,7 @@ function Reveal({
 /* ── Navigation Hint ── */
 function NavigationHint() {
   return (
-    <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[15] pointer-events-none text-white/40 font-mono text-[10px] uppercase tracking-[0.3em]">
+    <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[15] pointer-events-none text-white/40 font-mono text-[10px] uppercase tracking-[0.3em] hidden lg:block">
       <div className="flex items-center gap-3">
         <span className="flex items-center justify-center w-6 h-6 border border-white/20 rounded">←</span>
         <span>Use keys to navigate</span>
@@ -150,7 +150,7 @@ export default function CredibilityPage() {
 
           {/* ── Panel 2: Statement & Showreel (Opaque bg covers hero) ── */}
           <Panel id="panel-about" className="bg-white relative overflow-hidden text-black z-20">
-            <div className="container-wide h-full flex flex-col justify-between py-24">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
                   Who we are
@@ -167,7 +167,7 @@ export default function CredibilityPage() {
                   </Reveal>
                   <Reveal delay={0.2}>
                     <p className="text-lg mb-8 leading-relaxed text-neutral-600">
-                      We create brand stories and commercials for some of the world’s leading companies. From creative strategy to distribution, we offer a full video partnership; empowering brands to plan, craft and share their stories.
+                      We create brand stories and commercials for some of the world’s leading brands and agencies. From creative strategy to distribution, we offer a full video partnership; empowering brands to plan, craft and share their stories.
                     </p>
                     <p className="text-base leading-relaxed text-neutral-400 font-mono uppercase tracking-wider">
                       Headquartered in Dublin. Networked globally.
@@ -193,36 +193,38 @@ export default function CredibilityPage() {
 
           {/* ── Panel 3: Our Clients ── */}
           <Panel id="panel-clients" className="bg-[#E85D04] relative z-20">
-            <div className="container-wide h-full flex flex-col justify-between py-24 text-white">
+            <div className="container-wide h-full flex flex-col pt-[66px] pb-24 lg:py-24 text-white">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block">
                   Our clients
                 </span>
               </Reveal>
 
-              <Reveal delay={0.1} className="mt-auto mb-20 lg:-mb-20 lg:mt-10">
-                <h2 className="text-4xl lg:text-[100px] font-bold tracking-tight leading-[0.95]" style={{ letterSpacing: "-0.03em" }}>
-                  We’ve established <br className="hidden lg:block" />
-                  creative partnerships <br className="hidden lg:block" />
-                  with some of the world’s <br className="hidden lg:block" />
-                  leading brands.
-                </h2>
-              </Reveal>
+              <div className="flex-1 flex flex-col justify-center">
+                <Reveal delay={0.1} className="mb-12 lg:mt-60">
+                  <h2 className="text-4xl lg:text-[100px] font-bold tracking-tight leading-[0.95]" style={{ letterSpacing: "-0.03em" }}>
+                    We’ve established <br className="hidden lg:block" />
+                    creative partnerships <br className="hidden lg:block" />
+                    with some of the world’s <br className="hidden lg:block" />
+                    leading brands.
+                  </h2>
+                </Reveal>
 
-              <Reveal delay={0.2} className="mb-8">
-                <div className="relative w-full lg:max-w-[100%] origin-left text-left lg:-ml-15 lg:-mt-100">
-                  <img
-                    src="/LogoSlide.png"
-                    alt="Our Clients"
-                    className="hidden lg:block w-full h-auto object-contain object-left"
-                  />
-                  <img
-                    src="/LogoSlide-mobile.png"
-                    alt="Our Clients"
-                    className="block lg:hidden w-full h-auto object-contain object-left"
-                  />
-                </div>
-              </Reveal>
+                <Reveal delay={0.2}>
+                  <div className="relative w-full lg:-mt-80 lg:-ml-14">
+                    <img
+                      src="/LogoSlide.png"
+                      alt="Our Clients"
+                      className="hidden lg:block w-full h-auto object-contain object-left"
+                    />
+                    <img
+                      src="/LogoSlide-mobile.png"
+                      alt="Our Clients"
+                      className="block lg:hidden w-full h-auto object-contain object-left"
+                    />
+                  </div>
+                </Reveal>
+              </div>
 
               {/* Arrow icon in bottom right */}
               <div className="absolute bottom-10 right-10 opacity-50">
@@ -236,7 +238,7 @@ export default function CredibilityPage() {
 
           {/* ── Panel 4: Capabilities ── */}
           <Panel id="panel-capabilities" className="bg-white relative text-black z-20">
-            <div className="container-wide h-full flex flex-col justify-between py-24">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
                   Capabilities
@@ -305,14 +307,14 @@ export default function CredibilityPage() {
                     <img
                       src="/Tiny_Ark_Logo_White.png"
                       alt="Tiny Ark"
-                      className="w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px] h-auto object-contain"
+                      className="w-full max-w-[180px] md:max-w-[250px] lg:max-w-[320px] max-h-[15vh] h-auto object-contain"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="container-wide h-full flex flex-col justify-between py-24 relative z-10">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24 relative z-10">
               {/* Empty reveal to maintain flex-between structure without the 'Let's Talk' header */}
               <Reveal>
                 <div className="h-6 w-full" />

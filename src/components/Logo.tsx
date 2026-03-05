@@ -16,7 +16,7 @@ export default function Logo() {
                         <img
                             src="/Tiny_Ark_Logo_White.png"
                             alt="Tiny Ark"
-                            className="w-full max-w-[300px] md:max-w-[500px] lg:max-w-[800px] h-auto object-contain"
+                            className="w-full max-w-[280px] md:max-w-[450px] lg:max-w-[650px] max-h-[40vh] h-auto object-contain"
                         />
                     </div>
                 </div>

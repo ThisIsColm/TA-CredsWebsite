@@ -9,11 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tiny Ark — Creative Studio",
+  title: "Tiny Ark — Creative Video Agency",
   description:
-    "Tiny Ark is a creative studio specializing in strategy, design, motion, and digital experiences for brands that demand more.",
+    "Tiny Ark is a creative video agency specializing in strategy, design, motion, and digital experiences for brands that demand more.",
   openGraph: {
-    title: "Tiny Ark — Creative Studio",
+    title: "Tiny Ark — Creative Video Agency",
     description:
       "Strategy. Design. Motion. Web. Video. We build brands that move.",
     type: "website",
