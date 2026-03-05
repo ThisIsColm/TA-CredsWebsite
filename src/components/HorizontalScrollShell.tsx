@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Lenis from "lenis";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useScrollContext } from "./ScrollContext";
@@ -13,7 +13,7 @@ export default function HorizontalScrollShell({
     children,
 }: HorizontalScrollShellProps) {
     const targetRef = useRef<HTMLDivElement>(null);
-    const { setScrollProgress, setActivePanel, totalPanels, registerScrollToPanel, setScrollYProgress } =
+    const { setScrollProgress, setActivePanel, totalPanels, registerScrollToPanel } =
         useScrollContext();
     const [isMobile, setIsMobile] = useState(false);
 
@@ -26,15 +26,13 @@ export default function HorizontalScrollShell({
     }, []);
 
     // Use Framer Motion for scroll-driven transforms
-    const { scrollYProgress } = useScroll({
+    // Memoize options to prevent infinite render loops
+    const scrollOptions = useMemo(() => ({
         target: isMobile ? undefined : targetRef,
-        offset: ["start start", "end end"],
-    });
+        offset: ["start start", "end end"] as any,
+    }), [isMobile]);
 
-    // Share MotionValue with context
-    useEffect(() => {
-        setScrollYProgress(scrollYProgress);
-    }, [scrollYProgress, setScrollYProgress]);
+    const { scrollYProgress } = useScroll(scrollOptions);
 
     // Calculate the horizontal translate
     // 6 panels = 0vw to -500vw (since each panel is exactly 100vw)
@@ -68,16 +66,15 @@ export default function HorizontalScrollShell({
         return () => unsubscribe();
     }, [scrollYProgress, setScrollProgress, setActivePanel, totalPanels]);
 
-    // Lenis initialization — tuned for premium feel
+    // Lenis initialization — used only for smooth programmatic scrollTo animations.
+    // Wheel events are handled discretely by the custom handler below.
     const lenisRef = useRef<Lenis | null>(null);
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
-            smoothWheel: true,
-            wheelMultiplier: 0.8,
-            touchMultiplier: 1.0,
+            smoothWheel: true,    // Lenis must manage scroll pipeline for scrollTo to work
+            wheelMultiplier: 0,   // Zero out wheel input — discrete handler takes over
+            touchMultiplier: 1.5,
         });
         lenisRef.current = lenis;
 
@@ -92,23 +89,27 @@ export default function HorizontalScrollShell({
         };
     }, []);
 
-    // Snap function
-    const scrollToPanel = useCallback((index: number) => {
+    // Snap function - now accepts an optional onComplete callback
+    const scrollToPanel = useCallback((index: number, onComplete?: () => void) => {
         if (!lenisRef.current) return;
 
+        const options = {
+            duration: 0.8,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard expo out
+            onComplete: () => {
+                if (onComplete) onComplete();
+            }
+        };
+
         if (isMobile) {
-            lenisRef.current.scrollTo(index * window.innerHeight, {
-                duration: 0.8,
-            });
+            lenisRef.current.scrollTo(index * window.innerHeight, options);
         } else {
             const targetHeight = targetRef.current?.offsetHeight || 0;
             const windowHeight = window.innerHeight;
             const scrollableDist = targetHeight - windowHeight;
             const targetPos = (index / (totalPanels - 1)) * scrollableDist;
 
-            lenisRef.current.scrollTo(targetPos, {
-                duration: 0.8,
-            });
+            lenisRef.current.scrollTo(targetPos, options);
         }
     }, [isMobile, totalPanels]);
 
@@ -119,6 +120,7 @@ export default function HorizontalScrollShell({
 
     // Keyboard navigation — precise panel-by-panel movement
     const isScrollingRef = useRef(false);
+    const targetPanelRef = useRef(0);
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (isScrollingRef.current) return;
@@ -133,8 +135,13 @@ export default function HorizontalScrollShell({
                 const nextPanel = Math.min(currentPanel + 1, totalPanels - 1);
                 if (nextPanel > currentPanel || progress < (nextPanel / (totalPanels - 1))) {
                     isScrollingRef.current = true;
-                    scrollToPanel(nextPanel);
-                    setTimeout(() => { isScrollingRef.current = false; }, 1000);
+                    targetPanelRef.current = nextPanel;
+                    scrollToPanel(nextPanel, () => {
+                        setTimeout(() => {
+                            isScrollingRef.current = false;
+                            targetPanelRef.current = lastPanelRef.current;
+                        }, 150);
+                    });
                 }
             }
             if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
@@ -144,14 +151,67 @@ export default function HorizontalScrollShell({
                 const targetPanel = progress > (currentPanel / (totalPanels - 1)) + 0.02 ? currentPanel : prevPanel;
 
                 isScrollingRef.current = true;
-                scrollToPanel(targetPanel);
-                setTimeout(() => { isScrollingRef.current = false; }, 1000);
+                targetPanelRef.current = targetPanel;
+                scrollToPanel(targetPanel, () => {
+                    setTimeout(() => {
+                        isScrollingRef.current = false;
+                        targetPanelRef.current = lastPanelRef.current;
+                    }, 150);
+                });
             }
         };
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [scrollYProgress, totalPanels, scrollToPanel]);
+
+    // Wheel-driven slide navigation — one slide per intentional gesture.
+    // Uses targetPanelRef to track the "intended" destination and isScrollingRef to lock inputs.
+    useEffect(() => {
+        const container = targetRef.current;
+        if (!container || isMobile) return;
+
+        // Sync targetPanelRef with current panel on mount/resize
+        targetPanelRef.current = lastPanelRef.current;
+
+        const handleWheel = (e: WheelEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (isScrollingRef.current) return;
+
+            // Determine primary scroll axis
+            const absX = Math.abs(e.deltaX);
+            const absY = Math.abs(e.deltaY);
+            // Use whichever delta is stronger to support both vertical wheel and horizontal trackpad swipes
+            const delta = absX > absY ? e.deltaX : e.deltaY;
+
+            // Threshold to ignore trackpad noise/tiny movements
+            if (Math.abs(delta) < 20) return;
+
+            const current = targetPanelRef.current;
+            const next = delta > 0
+                ? Math.min(current + 1, totalPanels - 1)
+                : Math.max(current - 1, 0);
+
+            if (next === current) return;
+
+            isScrollingRef.current = true;
+            targetPanelRef.current = next;
+
+            scrollToPanel(next, () => {
+                // Buffer after animation to let momentum settle
+                setTimeout(() => {
+                    isScrollingRef.current = false;
+                    // Ensure our internal tracker is synced with where we actually landed
+                    targetPanelRef.current = lastPanelRef.current;
+                }, 150);
+            });
+        };
+
+        container.addEventListener("wheel", handleWheel, { passive: false });
+        return () => container.removeEventListener("wheel", handleWheel);
+    }, [isMobile, totalPanels, scrollToPanel]);
 
     if (isMobile) {
         return (
