@@ -1,17 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useScrollContext } from "./ScrollContext";
-import Logo from "./Logo";
 
 const PANEL_LABELS = ["Hero", "About", "Clients", "Capabilities", "Global", "Contact"];
 
 export default function Header() {
-    const { activePanel, scrollToPanel, scrollProgress } = useScrollContext();
-    const prefersReducedMotion = useReducedMotion();
+    const { activePanel } = useScrollContext();
 
     const isLightSlide = activePanel === 1 || activePanel === 3 || activePanel === 4;
-    const showBreadcrumbs = activePanel > 0;
 
     return (
         <motion.header

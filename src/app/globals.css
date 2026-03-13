@@ -195,6 +195,14 @@ a:active {
   padding-right: 2rem;
 }
 
+/* Extra small screens: slightly tighter padding to protect 320–480px devices */
+@media (max-width: 479px) {
+  .container-wide {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .container-wide {
     padding-left: 5rem;

@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import GrainOverlay from "@/components/GrainOverlay";
 import Panel from "@/components/Panel";
 import VimeoHero from "@/components/VimeoHero";
-import ProjectCard from "@/components/ProjectCard";
+
 import WorldMap from "@/components/WorldMap";
 import Logo from "@/components/Logo";
 
@@ -56,7 +56,7 @@ function NavigationHint() {
 /* ── Clickable Homepage Emails ── */
 function HomepageEmails() {
   return (
-    <div className="fixed bottom-48 left-8 lg:left-22 z-[15] pointer-events-none">
+    <div className="fixed bottom-48 left-8 lg:left-22 z-[15] pointer-events-none hidden lg:block">
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-24 text-white/80 font-mono text-sm lg:text-base tracking-widest uppercase">
         <a
           href="mailto:nathan@tinyark.com"
@@ -77,28 +77,7 @@ function HomepageEmails() {
 
 
 
-/* ── Data ── */
-const PROJECTS = [
-  {
-    title: "Lumina Rebrand",
-    description: "Full identity overhaul for a next-gen fintech platform. Brand strategy through launch.",
-    category: "Branding · Strategy",
-    imageBg: "#1e2a3a",
-  },
-  {
-    title: "Atmos Campaign",
-    description: "Cinematic campaign film and digital rollout for a sustainable lifestyle brand.",
-    category: "Motion · Video",
-    imageBg: "#2a1e1e",
-  },
-  {
-    title: "Vertex Platform",
-    description: "End-to-end web experience for a SaaS analytics tool. Design, motion, and front-end.",
-    category: "Web · Design",
-    imageBg: "#1e2a1e",
-  },
-];
-
+/* ── Capabilities Data ── */
 const CAPABILITIES = [
   {
     title: "Creative & Strategy",
@@ -112,20 +91,6 @@ const CAPABILITIES = [
     title: "Post-Production",
     description: "Full edit suites (remote and live). Motion graphics. VFX. Animation. Retouching. Colour. Sound. Music composition & licensing. Distribution."
   },
-];
-
-const PROCESS_STEPS = [
-  { step: "01", title: "Discover", description: "Deep-dive into your brand, goals, audience, and competitive landscape." },
-  { step: "02", title: "Define", description: "Crystallize strategy, creative direction, and project roadmap." },
-  { step: "03", title: "Design", description: "Craft visuals, prototypes, and motion concepts for review and iteration." },
-  { step: "04", title: "Deliver", description: "Build, polish, and launch production-ready assets and experiences." },
-];
-
-const TRUST_SIGNALS = [
-  "50+ Projects Delivered",
-  "12 Industries",
-  "98% Client Retention",
-  "Award-Winning Work",
 ];
 
 /* ── Page ── */
@@ -152,7 +117,7 @@ export default function CredibilityPage() {
           <Panel id="panel-about" className="bg-white relative overflow-hidden text-black z-20">
             <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-4 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
                   Who we are
                 </span>
               </Reveal>
@@ -176,7 +141,7 @@ export default function CredibilityPage() {
                 </div>
 
                 {/* Video content: span 7 columns on desktop */}
-                <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
+                <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video min-h-[220px] rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
                   <iframe
                     src="https://player.vimeo.com/video/1157268231?h=d42e6ade47&loop=1&byline=0&title=0&quality=1080p&color=e85d04"
                     className="w-full h-full"
@@ -195,7 +160,7 @@ export default function CredibilityPage() {
           <Panel id="panel-clients" className="bg-[#E85D04] relative z-20">
             <div className="container-wide h-full flex flex-col pt-[66px] pb-16 lg:py-24 text-white">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block">
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-4 lg:mb-0 block">
                   Our clients
                 </span>
               </Reveal>
@@ -219,17 +184,19 @@ export default function CredibilityPage() {
                     src="/LogoSlide.png"
                     alt="Our Clients"
                     className="hidden lg:block w-full h-auto object-contain object-left pointer-events-auto"
+                    loading="lazy"
                   />
                   <img
                     src="/LogoSlide-mobile.png"
                     alt="Our Clients"
                     className="block lg:hidden w-full h-auto object-contain object-left pointer-events-auto"
+                    loading="lazy"
                   />
                 </Reveal>
               </div>
 
-              {/* Arrow icon in bottom right */}
-              <div className="absolute bottom-10 right-10 opacity-50">
+              {/* Arrow icon in bottom right — decorative */}
+              <div className="absolute bottom-10 right-10 opacity-50" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform rotate-45">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>
@@ -242,14 +209,14 @@ export default function CredibilityPage() {
           <Panel id="panel-capabilities" className="bg-white relative text-black z-20">
             <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-4 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
                   Capabilities
                 </span>
               </Reveal>
 
               <div className="grid-layout items-center mt-auto mb-auto">
                 {/* Video: span 7 columns on desktop (on the left) */}
-                <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
+                <Reveal delay={0.3} className="col-span-4 lg:col-span-6 w-full aspect-video min-h-[200px] rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-neutral-100">
                   <iframe
                     src="https://player.vimeo.com/video/1169321210?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=1080p"
                     className="w-full h-full"
@@ -282,8 +249,8 @@ export default function CredibilityPage() {
                 </div>
               </div>
 
-              {/* Bottom Right Arrow */}
-              <div className="absolute bottom-12 right-12 z-20 text-neutral-400 opacity-30">
+              {/* Bottom Right Arrow — decorative */}
+              <div className="absolute bottom-12 right-12 z-20 text-neutral-400 opacity-30" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>

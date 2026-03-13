@@ -101,7 +101,7 @@ export default function WorldMap() {
     const prefersReducedMotion = useReducedMotion();
 
     return (
-        <div className="flex flex-col h-full w-full px-6 lg:px-16 pt-[66px] pb-24 lg:py-24 select-none justify-between max-w-7xl mx-auto">
+        <div className="container-wide h-full flex flex-col px-0 pt-[72px] pb-16 lg:py-24 select-none justify-between mx-auto">
             {/* Header section (replaces top headline to match breadcrumbs) */}
             <div className="w-full shrink-0">
                 <motion.span
@@ -115,7 +115,7 @@ export default function WorldMap() {
                     Global reach
                 </motion.span>
                 <motion.h2
-                    className="text-4xl lg:text-7xl font-bold tracking-tight mb-8 lg:mb-12 mt-4"
+                    className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8 lg:mb-12 mt-4"
                     style={{ color: "#111", letterSpacing: "-0.02em" }}
                     initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -126,8 +126,8 @@ export default function WorldMap() {
                 </motion.h2>
             </div>
 
-            {/* Map Container */}
-            <div className="relative w-full max-w-6xl mx-auto flex-1 min-h-0 flex items-center justify-center mt-auto mb-auto">
+            {/* Map Container — capped height prevents overflow on tall screens */}
+            <div className="relative w-full max-w-6xl mx-auto flex-1 min-h-0 flex items-center justify-center mt-auto mb-auto" style={{ maxHeight: '60vh' }}>
                 {/* 
                   * Wrap the map and pins in a strict 2:1 aspect ratio box.
                   * Capping the width ensures the height won't overflow shorter displays.
