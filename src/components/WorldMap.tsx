@@ -103,7 +103,7 @@ export default function WorldMap() {
     return (
         <div className="flex flex-col h-full w-full px-6 lg:px-16 pt-[66px] pb-24 lg:py-24 select-none justify-between max-w-7xl mx-auto">
             {/* Header section (replaces top headline to match breadcrumbs) */}
-            <div className="w-full">
+            <div className="w-full shrink-0">
                 <motion.span
                     className="text-xs font-mono uppercase tracking-[0.2em] block"
                     style={{ color: "var(--ark-accent)" }}
@@ -127,13 +127,15 @@ export default function WorldMap() {
             </div>
 
             {/* Map Container */}
-            <div className="relative w-full max-w-6xl mx-auto flex-1 flex items-center mt-auto mb-auto">
+            <div className="relative w-full max-w-6xl mx-auto flex-1 min-h-0 flex items-center justify-center mt-auto mb-auto">
                 {/* 
                   * Wrap the map and pins in a strict 2:1 aspect ratio box.
-                  * This matches the SVG's viewBox (1280x640) and ensures pin percentages 
-                  * always align with the projection regardless of screen scaling.
+                  * Capping the width ensures the height won't overflow shorter displays.
                   */}
-                <div className="relative w-full aspect-[2/1]">
+                <div
+                    className="relative w-full aspect-[2/1]"
+                    style={{ maxWidth: 'min(100%, 120vh)' }}
+                >
                     {/* SVG World Map from file */}
                     <img
                         src="/306338.svg"
@@ -258,7 +260,7 @@ export default function WorldMap() {
 
             {/* Bottom tagline */}
             <motion.p
-                className="text-lg lg:text-2xl font-medium text-center mt-8 lg:mt-12 tracking-tight"
+                className="text-lg lg:text-2xl font-medium text-center mt-8 lg:mt-12 tracking-tight shrink-0"
                 style={{ color: "#333" }}
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

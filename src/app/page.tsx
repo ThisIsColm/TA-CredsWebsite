@@ -150,7 +150,7 @@ export default function CredibilityPage() {
 
           {/* ── Panel 2: Statement & Showreel (Opaque bg covers hero) ── */}
           <Panel id="panel-about" className="bg-white relative overflow-hidden text-black z-20">
-            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
                   Who we are
@@ -161,12 +161,12 @@ export default function CredibilityPage() {
                 {/* Text content: span 5 columns on desktop */}
                 <div className="col-span-4 lg:col-span-6">
                   <Reveal delay={0.1}>
-                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-8" style={{ color: "#111", letterSpacing: "-0.02em" }}>
+                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6 lg:mb-8" style={{ color: "#111", letterSpacing: "-0.02em" }}>
                       Tiny Ark is a creative production studio.
                     </h2>
                   </Reveal>
                   <Reveal delay={0.2}>
-                    <p className="text-lg mb-8 leading-relaxed text-neutral-600">
+                    <p className="text-lg mb-6 lg:mb-8 leading-relaxed text-neutral-600">
                       We create brand stories and commercials for some of the world’s leading brands and agencies. From creative strategy to distribution, we offer a full video partnership; empowering brands to plan, craft and share their stories.
                     </p>
                     <p className="text-base leading-relaxed text-neutral-400 font-mono uppercase tracking-wider">
@@ -193,36 +193,38 @@ export default function CredibilityPage() {
 
           {/* ── Panel 3: Our Clients ── */}
           <Panel id="panel-clients" className="bg-[#E85D04] relative z-20">
-            <div className="container-wide h-full flex flex-col pt-[66px] pb-24 lg:py-24 text-white">
+            <div className="container-wide h-full flex flex-col pt-[66px] pb-16 lg:py-24 text-white">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block">
                   Our clients
                 </span>
               </Reveal>
 
-              <div className="flex-1 flex flex-col justify-center">
-                <Reveal delay={0.1} className="mb-12 lg:mt-60">
-                  <h2 className="text-4xl lg:text-[100px] font-bold tracking-tight leading-[0.95]" style={{ letterSpacing: "-0.03em" }}>
-                    We’ve established <br className="hidden lg:block" />
-                    creative partnerships <br className="hidden lg:block" />
-                    with some of the world’s <br className="hidden lg:block" />
+              <div className="flex-1 flex flex-col justify-start pt-4 lg:pt-8 min-h-0 relative">
+                <Reveal delay={0.1} className="mb-4 lg:mb-8 z-10 shrink-0 pointer-events-none">
+                  <h2 className="font-bold tracking-tight leading-[0.95] max-w-5xl"
+                    style={{
+                      letterSpacing: "-0.03em",
+                      fontSize: "clamp(2rem, min(6.5vw, 8vh), 100px)"
+                    }}>
+                    We’ve established <br className="hidden md:block" />
+                    creative partnerships <br className="hidden md:block" />
+                    with some of the world’s <br className="hidden md:block" />
                     leading brands.
                   </h2>
                 </Reveal>
 
-                <Reveal delay={0.2}>
-                  <div className="relative w-full lg:-mt-80 lg:-ml-14">
-                    <img
-                      src="/LogoSlide.png"
-                      alt="Our Clients"
-                      className="hidden lg:block w-full h-auto object-contain object-left"
-                    />
-                    <img
-                      src="/LogoSlide-mobile.png"
-                      alt="Our Clients"
-                      className="block lg:hidden w-full h-auto object-contain object-left"
-                    />
-                  </div>
+                <Reveal delay={0.2} className="relative lg:absolute mt-auto lg:mt-0 bottom-4 lg:bottom-0 pt-8 lg:pt-0 left-0 right-0 z-0 lg:-ml-14 w-full shrink-0 pointer-events-none">
+                  <img
+                    src="/LogoSlide.png"
+                    alt="Our Clients"
+                    className="hidden lg:block w-full h-auto object-contain object-left pointer-events-auto"
+                  />
+                  <img
+                    src="/LogoSlide-mobile.png"
+                    alt="Our Clients"
+                    className="block lg:hidden w-full h-auto object-contain object-left pointer-events-auto"
+                  />
                 </Reveal>
               </div>
 
@@ -238,7 +240,7 @@ export default function CredibilityPage() {
 
           {/* ── Panel 4: Capabilities ── */}
           <Panel id="panel-capabilities" className="bg-white relative text-black z-20">
-            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
                 <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
                   Capabilities
@@ -262,12 +264,12 @@ export default function CredibilityPage() {
                 {/* Text: span 5 columns on desktop (on the right) */}
                 <div className="col-span-4 lg:col-span-6">
                   <Reveal delay={0.1}>
-                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-12" style={{ color: "#111", letterSpacing: "-0.02em" }}>
+                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-8 lg:mb-12" style={{ color: "#111", letterSpacing: "-0.02em" }}>
                       Everything you need.
                     </h2>
                   </Reveal>
 
-                  <div className="grid grid-cols-1 gap-8">
+                  <div className="grid grid-cols-1 gap-6 lg:gap-8">
                     {CAPABILITIES.map((cap, i) => (
                       <Reveal key={cap.title} delay={0.2 + (0.1 * i)}>
                         <div className="border-l-2 border-neutral-200 pl-6 hover:border-[var(--ark-accent)] transition-colors">
@@ -301,7 +303,7 @@ export default function CredibilityPage() {
 
             {/* Small Logo positioned top-left */}
             <div className="absolute top-0 left-0 w-full z-[12] pointer-events-none select-none">
-              <div className="container-wide pt-24">
+              <div className="container-wide pt-16 lg:pt-24">
                 <div className="grid-layout">
                   <div className="col-span-12">
                     <img
@@ -314,7 +316,7 @@ export default function CredibilityPage() {
               </div>
             </div>
 
-            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-24 lg:py-24 relative z-10">
+            <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24 relative z-10">
               {/* Empty reveal to maintain flex-between structure without the 'Let's Talk' header */}
               <Reveal>
                 <div className="h-6 w-full" />
@@ -327,13 +329,13 @@ export default function CredibilityPage() {
                     </h2>
                   </Reveal>
                   <Reveal delay={0.2}>
-                    <p className="text-2xl mb-10 max-w-xl">
+                    <p className="text-2xl mb-8 lg:mb-10 max-w-xl">
                       Now, let’s make some great work together.
                     </p>
                   </Reveal>
 
                   <Reveal delay={0.3}>
-                    <div className="flex flex-col sm:flex-row gap-4 mb-14">
+                    <div className="flex flex-col sm:flex-row gap-4 mb-10 lg:mb-14">
                       <a
                         href="mailto:nathan@tinyark.com"
                         className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold uppercase tracking-wider rounded transition-all duration-300 hover:scale-[1.02]"
