@@ -152,7 +152,7 @@ export default function CredibilityPage() {
           <Panel id="panel-about" className="bg-white relative overflow-hidden text-black z-20">
             <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
                   Who we are
                 </span>
               </Reveal>
@@ -195,26 +195,26 @@ export default function CredibilityPage() {
           <Panel id="panel-clients" className="bg-[#E85D04] relative z-20">
             <div className="container-wide h-full flex flex-col pt-[66px] pb-16 lg:py-24 text-white">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] block">
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block">
                   Our clients
                 </span>
               </Reveal>
 
-              <div className="flex-1 flex flex-col justify-start pt-4 lg:pt-8 min-h-0 relative">
-                <Reveal delay={0.1} className="mb-4 lg:mb-8 z-10 shrink-0 pointer-events-none">
+              <div className="flex-1 flex flex-col justify-center gap-8 lg:gap-12 min-h-0">
+                <Reveal delay={0.1} className="shrink-0 pointer-events-none">
                   <h2 className="font-bold tracking-tight leading-[0.95] max-w-5xl"
                     style={{
                       letterSpacing: "-0.03em",
                       fontSize: "clamp(2rem, min(6.5vw, 8vh), 100px)"
                     }}>
-                    We’ve established <br className="hidden md:block" />
+                    We've established <br className="hidden md:block" />
                     creative partnerships <br className="hidden md:block" />
-                    with some of the world’s <br className="hidden md:block" />
+                    with some of the world's <br className="hidden md:block" />
                     leading brands.
                   </h2>
                 </Reveal>
 
-                <Reveal delay={0.2} className="relative lg:absolute mt-auto lg:mt-0 bottom-4 lg:bottom-0 pt-8 lg:pt-0 left-0 right-0 z-0 lg:-ml-14 w-full shrink-0 pointer-events-none">
+                <Reveal delay={0.2} className="shrink-0 pointer-events-none -mx-8 lg:-mx-14">
                   <img
                     src="/LogoSlide.png"
                     alt="Our Clients"
@@ -242,7 +242,7 @@ export default function CredibilityPage() {
           <Panel id="panel-capabilities" className="bg-white relative text-black z-20">
             <div className="container-wide h-full flex flex-col justify-between pt-[66px] pb-16 lg:py-24">
               <Reveal>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] block" style={{ color: "var(--ark-accent)" }}>
+                <span className="text-xs font-mono uppercase tracking-[0.2em] mb-5 lg:mb-0 block" style={{ color: "var(--ark-accent)" }}>
                   Capabilities
                 </span>
               </Reveal>
